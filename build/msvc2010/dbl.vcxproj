@@ -186,8 +186,8 @@
     <ClInclude Include="..\..\include\dbl\Core\GameWindow.h" />
     <ClInclude Include="..\..\include\dbl\Core\GameWindowSettings.h" />
     <ClInclude Include="..\..\include\dbl\Reflection\DblRegistrar.h" />
-    <ClInclude Include="..\..\include\dbl\Reflection\YAMLDeserialiser.h" />
-    <ClInclude Include="..\..\include\dbl\Reflection\YAMLSerialiser.h" />
+    <ClInclude Include="..\..\include\dbl\Serialisation\YAMLDeserialiser.h" />
+    <ClInclude Include="..\..\include\dbl\Serialisation\YAMLSerialiser.h" />
     <ClInclude Include="..\..\include\dbl\StdAfx.h" />
     <ClInclude Include="..\..\src\dbl\Core\IPlatformWindow.h" />
     <ClInclude Include="..\..\src\dbl\Core\Win32\Win32PlatformWindow.h" />
@@ -208,8 +208,8 @@
     <ClCompile Include="..\..\src\dbl\Input\KeyboardManager.cpp" />
     <ClCompile Include="..\..\src\dbl\Input\MouseManager.cpp" />
     <ClCompile Include="..\..\src\dbl\Reflection\DblRegistrar.cpp" />
-    <ClCompile Include="..\..\src\dbl\Reflection\YAMLDeserialiser.cpp" />
-    <ClCompile Include="..\..\src\dbl\Reflection\YAMLSerialiser.cpp" />
+    <ClCompile Include="..\..\src\dbl\Serialisation\YAMLDeserialiser.cpp" />
+    <ClCompile Include="..\..\src\dbl\Serialisation\YAMLSerialiser.cpp" />
     <ClCompile Include="..\..\src\dbl\StdAfx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugLib|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

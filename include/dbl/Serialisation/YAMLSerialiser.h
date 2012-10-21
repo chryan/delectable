@@ -17,61 +17,58 @@
  */
 
 /**
- * @file YAMLDeserialiser.h
- * @brief YAML deserialiser.
+ * @file YAMLSerialiser.h
+ * @brief YAML serialiser.
  */
 
-#ifndef __DBL_YAMLDESERIALISER_H_
-#define __DBL_YAMLDESERIALISER_H_
+#ifndef __DBL_YAMLSERIALISER_H_
+#define __DBL_YAMLSERIALISER_H_
 
-// Delectable Headers//
+// Delectable Headers //
 #include "dbl/Delectable.h"
 
 // Chewable Headers //
-#include "cbl/Reflection/NodeDeserialiser.h"
-
-// External Libraries //
-#include <yaml-cpp/yaml.h>
+#include "cbl/Serialisation/TreeSerialiser.h"
 
 namespace dbl
 {
-	//! YAML Deserialiser implementation.
-	class DBL_API YAMLDeserialiser :
-		public cbl::NodeDeserialiser
+	//! YAML Serialiser implementation.
+	class DBL_API YAMLSerialiser :
+		public cbl::TreeSerialiser
 	{
 	/***** Using Declarations *****/
 	public:
-		using cbl::Deserialiser::StreamPtr;
+		using cbl::Serialiser::StreamPtr;
 		
 	/***** Public Methods *****/
 	public:
 		//! Constructor.
-		YAMLDeserialiser();
-		//! Check if the stream has ended.
-		virtual bool IsStreamEnded( void ) const;
-		//! Get the next value type. Does not advanced the stream.
-		virtual bool GetValueType( StreamPtr s, cbl::String& type ) const;
+		YAMLSerialiser();
 		
 	/***** Protected Methods *****/
-	protected:
+	private:
 		//! Initialise the stream (implementation specific).
-		virtual StreamPtr Initialise( StreamPtr s, const cbl::Type* type, void* obj );
+		virtual StreamPtr Initialise( StreamPtr s, const cbl::Type* type, const void* obj );
 		//! Shutdown the stream (implementation specific).
-		virtual StreamPtr Shutdown( StreamPtr s, const cbl::Type* type, void* obj );
+		virtual StreamPtr Shutdown( StreamPtr s, const cbl::Type* type, const void* obj );
 		//! Traverse the stream specified by the path.
 		virtual StreamPtr TraverseStream( StreamPtr s, const cbl::Char* path );
 		//! Virtual method to begin writing a container entry.
 		virtual StreamPtr BeginContainerEntry( StreamPtr s, const cbl::Type* keyType, const cbl::Type* valType );
 		//! Virtual method to end writing a container entry.
 		virtual void EndContainerEntry( StreamPtr s, const cbl::Type* keyType, const cbl::Type* valType );
-		//! Get the next container key stream.
-		virtual StreamPtr GetContainerKeyStream( StreamPtr s ) const;
-		//! Get the next container value stream.
-		virtual StreamPtr GetContainerValueStream( StreamPtr s, bool hasKey ) const;
+		//! Virtual method to begin writing a key for a container.
+		virtual StreamPtr BeginContainerKey( StreamPtr s, const cbl::Type* keyType );
+		//! Virtual method to end writing a key for a container.
+		virtual void EndContainerKey( StreamPtr s, const cbl::Type* keyType );
+		//! Virtual method to begin writing a value for a container.
+		virtual StreamPtr BeginContainerValue( StreamPtr s, const cbl::Type* keyType, const cbl::Type* valType );
+		//! Virtual method to end writing a value for a container.
+		virtual void EndContainerValue( StreamPtr s, const cbl::Type* keyType, const cbl::Type* valType );
 		//! Virtual method to start writing data of a type.
-		virtual StreamPtr BeginValue( StreamPtr s, const cbl::Type* type, void * obj, const cbl::FieldAttr* attr );
+		virtual StreamPtr BeginValue( StreamPtr s, const cbl::Type* type, const void* obj, const cbl::FieldAttr* attr, cbl::Entity::OPTIONS opt, bool outputType );
 		//! Virtual method to end writing data of a type.
-		virtual void EndValue( StreamPtr s, const cbl::Type* type, void * obj, const cbl::FieldAttr* attr );
+		virtual void EndValue( StreamPtr s, const cbl::Type* type, const void* obj, const cbl::FieldAttr* attr, cbl::Entity::OPTIONS opt, bool outputType );
 		//! Virtual method to begin writing fields.
 		virtual StreamPtr BeginFields( StreamPtr s );
 		//! Virtual method to end writing fields.
@@ -80,22 +77,22 @@ namespace dbl
 		virtual StreamPtr BeginField( StreamPtr s, const cbl::Field* field );
 		//! Virtual method to end writing a field.
 		virtual void EndField( StreamPtr s, const cbl::Field* field );
+		//! Output serialised data to a file.
+		virtual void OnOutput( StreamPtr s, const cbl::Char* filename );
 		//! Called when the stream has been set.
 		virtual void OnStreamSet( void );
 		
 	/***** Private Members *****/
 	private:
-		bool				mHasDocument;	//!< Flag indicating if stream has a new YAML document.
-		YAML::Node			mRoot;			//!< Current root YAML node.
-		YAML::Iterator		mBeginIt;		//!< YAML begin iterator for field containers.
-		YAML::Iterator		mEndIt;			//!< YAML end iterator for field containers.
+		bool			mInlineContainer;	//!< Flag to indicate if the field container has the inline flag set.
+		cbl::Uint32		mTraverseCount;		//!< Node traversal count.
 	};
 }
 
 namespace cbl
 {
 	template<>
-	DBL_API ObjectPtr ObjectManager::LoadObjectFromFile<dbl::YAMLDeserialiser>( const Char* file, const Char* name, bool init );
+	DBL_API void ObjectManager::SaveObjectToFile<dbl::YAMLSerialiser>( const Char* file, ObjectPtr obj ) const;
 }
 
-#endif // __DBL_YAMLDESERIALISER_H_
+#endif // __DBL_YAMLSERIALISER_H_

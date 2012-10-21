@@ -17,6 +17,9 @@
     <Filter Include="Source Files\Reflection">
       <UniqueIdentifier>{80fbaf12-eb59-4a30-b675-ebe22b0a1d71}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Serialisation">
+      <UniqueIdentifier>{6cb28c9f-f655-42e3-8999-96ec2d8918c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\dbl\Delectable.h">
@@ -61,12 +64,6 @@
     <ClInclude Include="..\..\include\dbl\StdAfx.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\dbl\Reflection\YAMLSerialiser.h">
-      <Filter>Source Files\Reflection</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\dbl\Reflection\YAMLDeserialiser.h">
-      <Filter>Source Files\Reflection</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\dbl\Reflection\DblRegistrar.h">
       <Filter>Source Files\Reflection</Filter>
     </ClInclude>
@@ -75,6 +72,12 @@
     </ClInclude>
     <ClInclude Include="..\..\include\dbl\Core\LevelObject.h">
       <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\dbl\Serialisation\YAMLDeserialiser.h">
+      <Filter>Source Files\Serialisation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\dbl\Serialisation\YAMLSerialiser.h">
+      <Filter>Source Files\Serialisation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -102,12 +105,6 @@
     <ClCompile Include="..\..\src\dbl\Core\Win32\GameWindow_Win32.cpp">
       <Filter>Source Files\Core\Win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\dbl\Reflection\YAMLSerialiser.cpp">
-      <Filter>Source Files\Reflection</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\dbl\Reflection\YAMLDeserialiser.cpp">
-      <Filter>Source Files\Reflection</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\dbl\Reflection\DblRegistrar.cpp">
       <Filter>Source Files\Reflection</Filter>
     </ClCompile>
@@ -119,6 +116,12 @@
     </ClCompile>
     <ClCompile Include="..\..\src\dbl\Core\LevelManager_Serialisers.cpp">
       <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\dbl\Serialisation\YAMLDeserialiser.cpp">
+      <Filter>Source Files\Serialisation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\dbl\Serialisation\YAMLSerialiser.cpp">
+      <Filter>Source Files\Serialisation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
